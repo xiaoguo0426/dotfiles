@@ -9,10 +9,12 @@ sudo apt install -y git
 
 # 安装docker并完成配置
 sudo apt install -y docker.io
-sudo usermod -aG docker $USER
-newgrp docker
+sudo systemctl enable --now docker
+sudo mkdir -p /etc/docker
 sudo ln -sf "$DOTFILES_DIR/docker/daemon.json" /etc/docker/daemon.json
+sudo systemctl restart docker
 docker -v
+sudo usermod -aG docker $USER
 
 # 安装 zsh，oh-my-zsh
 sudo apt install -y zsh
