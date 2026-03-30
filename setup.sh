@@ -17,8 +17,12 @@ docker -v
 sudo usermod -aG docker $USER
 
 # 安装 zsh，oh-my-zsh
-sudo apt install -y zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if ! command -v zsh &> /dev/null; then
+    # 安装 zsh
+    sudo apt install -y zsh
+fi
+chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -34,7 +38,9 @@ sudo apt install -y neovim
 ln -sf ~/gits/dotfiles/nvim ~/.config/nvim
 
 # 安装ghostty
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+if ! command -v ghostty &> /dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+fi
 mkdir -p ~/.config/ghostty
 ln -sf "$DOTFILES_DIR/ghostty/config/config" ~/.config/ghostty/config
 
