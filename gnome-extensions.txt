@@ -1,0 +1,16 @@
+user-theme@gnome-shell-extensions.gcampax.github.com
+extension-list@tu.berry
+smile-extension@mijorus.it
+clipboard-indicator@tudmotu.com
+lockscreen-extension@pratap.fastmail.fm
+kimpanel@kde.org
+ding@rastersoft.com
+tiling-assistant@ubuntu.com
+ubuntu-appindicators@ubuntu.com
+ubuntu-dock@ubuntu.com
+apps-menu@gnome-shell-extensions.gcampax.github.com
+auto-move-windows@gnome-shell-extensions.gcampax.github.com
+native-window-placement@gnome-shell-extensions.gcampax.github.com
+places-menu@gnome-shell-extensions.gcampax.github.com
+system-monitor@gnome-shell-extensions.gcampax.github.com
+windowsNavigator@gnome-shell-extensions.gcampax.github.com
