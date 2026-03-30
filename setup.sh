@@ -55,7 +55,54 @@ sudo apt install -y gnome-shell-extension-manager
 # 恢复 GNOME 扩展配置
 if [ -f "$DOTFILES_DIR/gnome-extensions-settings.dconf" ]; then
     dconf load /org/gnome/shell/extensions/ < "$DOTFILES_DIR/gnome-extensions-settings.dconf"
-    cat $DOTFILES_DIR/gnome-extensions.txt | xargs -I {} gnome-extensions install {}
+fi
+
+# 安装 GNOME 扩展
+install_gnome_extensions() {
+    local EXTENSIONS_FILE="$1"
+    local GNOME_VERSION=$(gnome-shell --version | grep -oP '\d+' | head -1)
+    local EXTENSIONS_DIR="$HOME/.local/share/gnome-shell/extensions"
+    
+    mkdir -p "$EXTENSIONS_DIR"
+    
+    while IFS= read -r EXTENSION_UUID || [ -n "$EXTENSION_UUID" ]; do
+        [ -z "$EXTENSION_UUID" ] && continue
+        
+        EXTENSION_NAME="${EXTENSION_UUID%@*}"
+        EXTENSION_DIR="$EXTENSIONS_DIR/$EXTENSION_UUID"
+        
+        if [ -d "$EXTENSION_DIR" ]; then
+            echo "已安装: $EXTENSION_UUID"
+            continue
+        fi
+        
+        echo "正在安装: $EXTENSION_UUID"
+        
+        EXTENSION_PK=$(curl -s "https://extensions.gnome.org/extension-info/?uuid=$EXTENSION_UUID" | grep -oP '"pk":\s*\K\d+')
+        
+        if [ -z "$EXTENSION_PK" ]; then
+            echo "  无法获取扩展信息: $EXTENSION_UUID"
+            continue
+        fi
+        
+        DOWNLOAD_URL="https://extensions.gnome.org/extension-data/${EXTENSION_UUID/-/}.v${EXTENSION_PK}.shell-extension.zip"
+        
+        TEMP_ZIP=$(mktemp --suffix=.zip)
+        if curl -sL "$DOWNLOAD_URL" -o "$TEMP_ZIP" 2>/dev/null && [ -s "$TEMP_ZIP" ]; then
+            mkdir -p "$EXTENSION_DIR"
+            unzip -q "$TEMP_ZIP" -d "$EXTENSION_DIR"
+            echo "  安装成功: $EXTENSION_UUID"
+        else
+            echo "  下载失败: $EXTENSION_UUID"
+        fi
+        rm -f "$TEMP_ZIP"
+    done < "$EXTENSIONS_FILE"
+}
+
+if [ -f "$DOTFILES_DIR/gnome-extensions.txt" ]; then
+    echo ""
+    echo "正在安装 GNOME 扩展..."
+    install_gnome_extensions "$DOTFILES_DIR/gnome-extensions.txt"
 fi
 
 echo "Setup completed! Please restart your terminal or run 'source ~/.zshrc' to apply changes."
