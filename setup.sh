@@ -30,7 +30,9 @@ sudo systemctl start docker
 sudo systemctl enable docker
 
 # 将当前用户添加到 docker 组
-sudo usermod -aG docker $USER
+if ! groups $USER | grep -q '\bdocker\b'; then
+    sudo usermod -aG docker $USER
+fi
 
 docker -v
 
