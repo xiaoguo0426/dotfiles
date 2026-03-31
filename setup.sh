@@ -31,8 +31,6 @@ sudo systemctl enable docker
 
 # 将当前用户添加到 docker 组
 sudo usermod -aG docker $USER
-# 刷新组权限（或注销后重新登录）
-newgrp docker
 
 docker -v
 
@@ -78,4 +76,4 @@ sudo apt install -y gnome-shell-extension-manager
 #     dconf load /org/gnome/shell/extensions/ < "$DOTFILES_DIR/gnome-extensions-settings.dconf"
 # fi
 
-echo "Setup completed! Please restart your terminal or run 'source ~/.zshrc' to apply changes."
+echo "Setup completed! Please restart your terminal or run 'newgrp docker && source ~/.zshrc' to apply changes."
