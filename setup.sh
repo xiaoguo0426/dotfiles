@@ -23,7 +23,7 @@ echo \
 sudo apt update
 
 # 安装 Docker Engine
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 # 启动 Docker 守护进程
 sudo systemctl start docker
 # 设置开机自启
