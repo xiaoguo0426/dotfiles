@@ -45,11 +45,25 @@ if ! command -v zsh &> /dev/null; then
     sudo apt install -y zsh
 fi
 sudo chsh -s $(which zsh)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-sudo apt install -y autojump
+# 判断oh-my-zsh 是否已存在
+if ! command -v omz &> /dev/null; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+if ! command -v p10k &> /dev/null; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+fi
+# 判断文件夹是否存在
+if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+# 判断文件夹是否存在
+if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+if ! command -v autojump &> /dev/null; then
+    sudo apt install -y autojump
+fi
+
 ln -sf "$DOTFILES_DIR/.zshrc" ~/.zshrc
 ln -sf "$DOTFILES_DIR/.p10k.zsh" ~/.p10k.zsh
 ln -sf "$DOTFILES_DIR/.oh-my-zsh/aliases.zsh" ~/.oh-my-zsh/aliases.zsh
@@ -75,13 +89,15 @@ ln -sf "$DOTFILES_DIR/ghostty/config/config" ~/.config/ghostty/config
 
 # 安装lsd
 echo "正在安装 lsd..."
-sudo apt install -y lsd
+if ! command -v lsd &> /dev/null; then
+    sudo apt install -y lsd
+fi
 mkdir -p ~/.config/lsd
 ln -sf "$DOTFILES_DIR/lsd/config.yaml" ~/.config/lsd/config.yaml
 
 # 安装nvm
 echo "正在安装 nvm..."
-if [ ! -d "$HOME/.nvm" ]; then
+if ! command -v nvm &> /dev/null; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 fi
 
@@ -95,9 +111,9 @@ fi
 if ! command -v lazyssh &> /dev/null; then
     echo "正在安装 lazyssh..."
     # 先尝试直接下载二进制文件
-    if curl -sL https://github.com/Adembc/lazyssh/releases/download/latest/lazyssh_Linux_x86_64.tar.gz -o /tmp/lazyssh.tar.gz 2>/dev/null; then
+    if curl -sL https://github.com/Adembc/lazyssh/releases/download/v0.3.0/lazyssh_Linux_x86_64.tar.gz -o /tmp/lazyssh.tar.gz 2>/dev/null; then
         tar -xzf /tmp/lazyssh.tar.gz -C /tmp
-        sudo mv /tmp/lazyssh /usr/local/bin/ 2>/dev/null || sudo mv /tmp/lazyssh_* /usr/local/bin/lazyssh 2>/dev/null
+        sudo mv /tmp/lazyssh /usr/local/bin/ 2>/dev/null
         rm -f /tmp/lazyssh.tar.gz
     else
         echo "警告: lazyssh 安装失败，请手动安装"
