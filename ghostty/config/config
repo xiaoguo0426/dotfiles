@@ -57,7 +57,7 @@ font-size                      = 12
 
 # 选中的文本颜色
 selection-foreground           = #e4d5e6
-selection-background           = #9c4444
+selection-background           = #b26363ff
 # 光标
 cursor-style				   = block
 cursor-style-blink 			   = true

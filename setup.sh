@@ -21,15 +21,17 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-
 # 安装 Docker Engine
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# 判断 /etc/docker/daemon.json 是否存在
+if [ ! -f /etc/docker/daemon.json ]; then
+    sudo mkdir -p /etc/docker
+    sudo ln -sf "$DOTFILES_DIR/daemon.json" /etc/docker/daemon.json
+fi
 # 启动 Docker 守护进程
 sudo systemctl start docker
 # 设置开机自启
 sudo systemctl enable docker
-
 # 将当前用户添加到 docker 组
 if ! groups $USER | grep -q '\bdocker\b'; then
     sudo usermod -aG docker $USER
@@ -42,7 +44,7 @@ if ! command -v zsh &> /dev/null; then
     # 安装 zsh
     sudo apt install -y zsh
 fi
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -50,6 +52,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 sudo apt install -y autojump
 ln -sf "$DOTFILES_DIR/.zshrc" ~/.zshrc
 ln -sf "$DOTFILES_DIR/.p10k.zsh" ~/.p10k.zsh
+ln -sf "$DOTFILES_DIR/.oh-my-zsh/aliases.zsh" ~/.oh-my-zsh/aliases.zsh
+ln -sf "$DOTFILES_DIR/.oh-my-zsh/functions.zsh" ~/.oh-my-zsh/functions.zsh
 
 # 安装vim
 echo "正在安装 vim..."
@@ -91,7 +95,7 @@ fi
 if ! command -v lazyssh &> /dev/null; then
     echo "正在安装 lazyssh..."
     # 先尝试直接下载二进制文件
-    if curl -sL https://github.com/jesseduffield/lazyssh/releases/latest/download/lazyssh_Linux_x86_64.tar.gz -o /tmp/lazyssh.tar.gz 2>/dev/null; then
+    if curl -sL https://github.com/Adembc/lazyssh/releases/download/latest/lazyssh_Linux_x86_64.tar.gz -o /tmp/lazyssh.tar.gz 2>/dev/null; then
         tar -xzf /tmp/lazyssh.tar.gz -C /tmp
         sudo mv /tmp/lazyssh /usr/local/bin/ 2>/dev/null || sudo mv /tmp/lazyssh_* /usr/local/bin/lazyssh 2>/dev/null
         rm -f /tmp/lazyssh.tar.gz
@@ -103,15 +107,14 @@ fi
 # 安装lazygit
 if ! command -v lazygit &> /dev/null; then
     echo "正在安装 lazygit..."
-    LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": *"v\K[^"]*')
-    if [ -n "$LAZYGIT_VERSION" ]; then
-        curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+    if curl -sL https://github.com/jesseduffield/lazygit/releases/download/v0.60.0/lazygit_0.60.0_linux_x86_64.tar.gz -o /tmp/lazygit.tar.gz 2>/dev/null; then
         tar -xzf /tmp/lazygit.tar.gz -C /tmp
-        sudo install /tmp/lazygit -D -t /usr/local/bin/
-        rm -f /tmp/lazygit.tar.gz /tmp/lazygit
+        sudo mv /tmp/lazygit /usr/local/bin/ 2>/dev/null || sudo mv /tmp/lazygit_* /usr/local/bin/lazygit 2>/dev/null
+        rm -f /tmp/lazygit.tar.gz
     else
-        echo "警告: 无法获取 lazygit 版本信息"
+        echo "警告: lazygit 安装失败，请手动安装"
     fi
+
 fi
 
 # 安装lazyjournal
