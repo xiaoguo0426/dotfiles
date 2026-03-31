@@ -7,14 +7,34 @@ sudo apt update
 # 安装git
 sudo apt install -y git
 
-# 安装docker并完成配置
-sudo apt install -y docker.io
-sudo systemctl enable --now docker
-sudo mkdir -p /etc/docker
-sudo ln -sf "$DOTFILES_DIR/docker/daemon.json" /etc/docker/daemon.json
-sudo systemctl restart docker
-docker -v
+# 安装docker
+
+# 安装依赖包
+sudo apt install ca-certificates curl
+# 添加 Docker 官方 GPG 密钥
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+# 添加 Docker APT 仓库
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+
+# 安装 Docker Engine
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# 启动 Docker 守护进程
+sudo systemctl start docker
+# 设置开机自启
+sudo systemctl enable docker
+
+# 将当前用户添加到 docker 组
 sudo usermod -aG docker $USER
+# 刷新组权限（或注销后重新登录）
+newgrp docker
+
+docker -v
 
 # 安装 zsh，oh-my-zsh
 if ! command -v zsh &> /dev/null; then
