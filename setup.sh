@@ -68,6 +68,72 @@ sudo apt install -y lsd
 mkdir -p ~/.config/lsd
 ln -sf "$DOTFILES_DIR/lsd/config.yaml" ~/.config/lsd/config.yaml
 
+# 安装nvm
+if [ ! -d "$HOME/.nvm" ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+fi
+
+# 安装lazydocker
+if ! command -v lazydocker &> /dev/null; then
+    curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+fi
+
+# 安装lazyssh
+if ! command -v lazyssh &> /dev/null; then
+    curl -sL https://github.com/jesseduffield/lazyssh/releases/latest/download/lazyssh_$(uname -s)_$(uname -m).tar.gz | tar xz -C /tmp
+    sudo mv /tmp/lazyssh /usr/local/bin/
+fi
+
+# 安装lazygit
+if ! command -v lazygit &> /dev/null; then
+    LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": *"v\K[^"]*')
+    curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+    tar xf /tmp/lazygit.tar.gz lazygit -C /tmp
+    sudo install /tmp/lazygit -D -t /usr/local/bin/
+    rm -f /tmp/lazygit.tar.gz /tmp/lazygit
+fi
+
+# 安装lazyjournal
+if ! command -v lazyjournal &> /dev/null; then
+    curl -sL https://github.com/Lifailon/lazyjournal/releases/latest/download/lazyjournal-linux-$(uname -m) -o /tmp/lazyjournal
+    sudo install /tmp/lazyjournal -D -t /usr/local/bin/
+    rm -f /tmp/lazyjournal
+fi
+
+# 安装btop
+sudo apt install -y btop
+
+# 安装tenv (Terraform version manager)
+# if ! command -v tenv &> /dev/null; then
+#     curl -sL https://github.com/tofuutils/tenv/releases/latest/download/tenv_$(uname -s)_$(uname -m).tar.gz | tar xz -C /tmp
+#     sudo mv /tmp/tenv /usr/local/bin/
+# fi
+
+# 安装jq
+sudo apt install -y jq
+
+# 安装yazi
+if ! command -v yazi &> /dev/null; then
+    curl -sL https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip -o /tmp/yazi.zip
+    unzip -o /tmp/yazi.zip -d /tmp/yazi
+    sudo mv /tmp/yazi/yazi /usr/local/bin/
+    sudo mv /tmp/yazi/ya /usr/local/bin/
+    rm -rf /tmp/yazi /tmp/yazi.zip
+fi
+
+# 安装systemctl-tui
+if ! command -v systemctl-tui &> /dev/null; then
+    curl -sL https://github.com/rgwood/systemctl-tui/releases/latest/download/systemctl-tui-linux-x86_64.tar.gz | tar xz -C /tmp
+    sudo mv /tmp/systemctl-tui /usr/local/bin/
+fi
+
+# 安装glow
+if ! command -v glow &> /dev/null; then
+    curl -sL https://github.com/charmbracelet/glow/releases/latest/download/glow_linux_x86_64.tar.gz | tar xz -C /tmp
+    sudo mv /tmp/glow /usr/local/bin/
+fi
+
+
 # 安装 GNOME 扩展管理工具
 sudo apt install -y gnome-shell-extension-manager
 
