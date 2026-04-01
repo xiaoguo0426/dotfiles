@@ -1,6 +1,8 @@
 
 CUSTOM_COMMAND_DIR="$ZSH_CUSTOM/my-commands"
 
+alias laradock="$CUSTOM_COMMAND_DIR/laradock"
+alias lw="$CUSTOM_COMMAND_DIR/lw"
 alias ld="laradock"
 alias lzd="lazydocker"
 alias s="lazyssh"

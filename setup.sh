@@ -301,8 +301,6 @@ sudo apt install -y gnome-shell-extension-manager
 
 # 将自定义命令链接到 /usr/local/bin/，这样 sudo 也能使用
 echo "正在配置自定义命令..."
-sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/lw" /usr/local/bin/lw
-sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/laradock" /usr/local/bin/laradock
 sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/json.sh" /usr/local/bin/json
 sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/ubuntu-clean.sh" /usr/local/bin/ubuntu-clean
 sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/ubuntu-mainline-kernel.sh" /usr/local/bin/ubuntu-mainline-kernel
