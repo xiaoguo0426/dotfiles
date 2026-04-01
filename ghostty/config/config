@@ -50,6 +50,7 @@
 
 # 配置项 https://blog.axiaoxin.com/post/ghostty-config-guide/
 
+theme = Atom One Dark
 
 # 外观
 font-family                    = JetBrains Mono
@@ -57,7 +58,7 @@ font-size                      = 12
 
 # 选中的文本颜色
 selection-foreground           = #e4d5e6
-selection-background           = #b26363ff
+selection-background           = #a37d7d
 # 光标
 cursor-style				   = block
 cursor-style-blink 			   = true
@@ -71,6 +72,7 @@ title 						   = "终端"
 
 # 附加功能
 shell-integration-features = true
+# 选中文本后自动复制
 copy-on-select = clipboard
 focus-follows-mouse = true
 link-url = true
