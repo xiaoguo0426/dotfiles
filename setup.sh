@@ -12,7 +12,7 @@ sudo apt install -y git
 # 安装依赖包
 if ! command -v docker &> /dev/null; then
   echo "正在安装 docker..."
-  sudo apt install ca-certificates curl
+  sudo apt install -y ca-certificates curl
   # 添加 Docker 官方 GPG 密钥
   sudo install -m 0755 -d /etc/apt/keyrings
   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -218,7 +218,7 @@ fi
 if ! command -v yazi &> /dev/null; then
     echo "正在安装 yazi..."
 
-    sudo apt install unzip ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
+    sudo apt install -y unzip ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
     
     if curl -sL https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip -o /tmp/yazi.zip 2>/dev/null; then
         mkdir -p /tmp/yazi_extract
@@ -298,5 +298,15 @@ sudo apt install -y gnome-shell-extension-manager
 # if [ -f "$DOTFILES_DIR/gnome-extensions-settings.dconf" ]; then
 #     dconf load /org/gnome/shell/extensions/ < "$DOTFILES_DIR/gnome-extensions-settings.dconf"
 # fi
+
+# 将自定义命令链接到 /usr/local/bin/，这样 sudo 也能使用
+echo "正在配置自定义命令..."
+sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/lw" /usr/local/bin/lw
+sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/laradock" /usr/local/bin/laradock
+sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/json.sh" /usr/local/bin/json
+sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/ubuntu-clean.sh" /usr/local/bin/ubuntu-clean
+sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/ubuntu-mainline-kernel.sh" /usr/local/bin/ubuntu-mainline-kernel
+sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/diff_file.sh" /usr/local/bin/diff-file
+sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/reset-trial-navicat.sh" /usr/local/bin/reset-navicat
 
 echo "Setup completed! Please restart your terminal or run 'newgrp docker && source ~/.zshrc' to apply changes."
