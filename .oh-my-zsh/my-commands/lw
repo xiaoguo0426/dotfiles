@@ -1,0 +1,43 @@
+#!/bin/zsh
+
+# 获取脚本所在目录
+SCRIPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
+
+# 引入公共部分
+if [ -f "$SCRIPT_DIR/common.sh" ]; then
+    source "$SCRIPT_DIR/common.sh"
+else
+    echo "错误: 找不到 common.sh 文件在 $SCRIPT_DIR"
+    exit 1
+fi
+
+laradock_path="$HOME/gits/laradock"
+# 使用数组存储命令，这样参数可以正确分割
+restart_workspace=(docker compose restart workspace)
+enter_workspace=(docker compose exec --user=laradock workspace bash)
+
+if [ "$#" -eq 0 ]; then
+  log_info "🚀Laradock Workspace container..."
+  cd $laradock_path || { log_error "无法切换到目录: $laradock_path"; exit 1; }
+  "${enter_workspace[@]}"
+elif [ "$#" -eq 1 ]; then
+  if [ "$1" = "-8" ]; then
+    log_info "🚀Laradock 8 Workspace container..."
+    cd $laradock_path || { log_error "无法切换到目录: $laradock_path"; exit 1; }
+    "${enter_workspace[@]}"
+  elif [ "$1" = "-r" ]; then
+    log_warning "⏳Restart Laradock 8 Workspace container"
+    cd $laradock_path || { log_error "无法切换到目录: $laradock_path"; exit 1; }
+    "${restart_workspace[@]}"
+    log_info "🚀Laradock Workspace 8 container..."
+    "${enter_workspace[@]}"
+  fi
+elif [ "$#" -eq 2 ]; then
+  if [ "$1" = "-8" ] && [ "$2" = "-r" ]; then
+    log_warning "⏳Restart Laradock 8 Workspace container"
+    cd $laradock_path || { log_error "无法切换到目录: $laradock_path"; exit 1; }
+    "${restart_workspace[@]}"
+    log_info "🚀Laradock 8 Workspace container..."
+    "${enter_workspace[@]}"
+  fi
+fi

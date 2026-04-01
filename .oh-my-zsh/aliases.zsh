@@ -1,25 +1,29 @@
 
-mycommands="/home/xiaoguo0426/my-commands"
-alias lw="$mycommands/lw"
-alias laradock="$mycommands/laradock"
-alias ld="laradock"
-alias lazydocker="$mycommands/lazydocker"
-alias lzd="lazydocker"
-alias lazyssh="$mycommands/lazyssh"
-alias s="lazyssh"
-alias swoole="$mycommands/swoole-cli"
-alias g="$mycommands/lazygit"
+CUSTOM_COMMAND_DIR="$ZSH_CUSTOM/my-commands"
 
-alias lazyjournal="$mycommands/lazyjournal"
-alias json="$mycommands/json.sh"
+alias laradock="$CUSTOM_COMMAND_DIR/laradock"
+alias lw="$CUSTOM_COMMAND_DIR/lw"
+alias ld="laradock"
+alias lzd="lazydocker"
+alias s="lazyssh"
+alias g="lazygit"
+
+alias json="$CUSTOM_COMMAND_DIR/json.sh"
 alias jsonc="json -c"
-alias btop="$mycommands/btop/bin/btop"
-alias nvim="/home/xiaoguo0426/softwares/nvim/bin/nvim"
-alias csv="$mycommands/tennis"
+
+# 终端中查看csv文件
+alias csv="tennis"
+
 alias ls='lsd'
 alias ll='lsd -l'
 alias la='lsd -la'
 alias lt='lsd --tree'
 alias l='lsd -lA'
+
 alias sd='systemd-manager-tui'
-alias c="glow $mycommands/custome-commands.md"
+alias c="glow $CUSTOM_COMMAND_DIR/custom-commands.md"
+
+alias diff-file="$CUSTOM_COMMAND_DIR/diff_file.sh"
+alias reset-navicat="$CUSTOM_COMMAND_DIR/reset-trial-navicat.sh"
+alias ubuntu-clean="$CUSTOM_COMMAND_DIR/ubuntu-clean.sh"
+alias ubuntu-mainline-kernel="$CUSTOM_COMMAND_DIR/ubuntu-mainline-kernel.sh"
