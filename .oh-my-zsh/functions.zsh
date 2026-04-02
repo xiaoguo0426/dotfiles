@@ -33,3 +33,16 @@ function y() {
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+
+# GLM
+glm() {
+    if [[ -z "$GLM_KEY" ]]; then
+        echo "错误: GLM_KEY 未设置"
+        echo "请在 ~/.bashrc 中添加: export GLM_KEY='your-api-key'"
+        return 1
+    fi
+    ANTHROPIC_AUTH_TOKEN="$GLM_KEY" \
+    ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/anthropic" \
+    ANTHROPIC_MODEL="glm-5" \
+    claude "$@"
+}

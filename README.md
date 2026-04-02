@@ -78,6 +78,7 @@ dotfiles/
 |------|------|
 | nvm | Node.js 版本管理器 |
 | jq | JSON 处理工具 |
+| Claude Code | Anthropic 官方 AI 编程助手 CLI |
 
 ### Lazy 系列工具
 
@@ -206,6 +207,8 @@ echo '{"name":"test"}' | json  # 格式化 JSON
 - Zsh
 - Ghostty
 - nvm
+- Node.js (通过 nvm 安装 LTS 版本)
+- Claude Code
 - lazydocker
 - lazygit
 - lazyssh

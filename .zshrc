@@ -130,9 +130,6 @@ if [ -d "$ZSH_FUNCTIONS_DIR" ]; then
     done
 fi
 
-
-
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 export ZSH_DISABLE_COMPFIX="true"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -260,3 +257,4 @@ export NVM_DIR="$HOME/.nvm"
 # 自定义函数 放到$ZSH_CUSTOM/functions.zsh
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+export PATH="$HOME/.local/bin:$PATH"

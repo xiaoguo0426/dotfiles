@@ -36,7 +36,7 @@
 | `y`           | 启动 `yazi`，退出后若切换了目录则 `cd` 到该目录                        |
 | `btop`        | `btop` 命令                                             |
 | `glow`        | `glow` 命令 用于在终端中渲染markdown文档                          |
-
+| `mkcert`        | `mkcert` 命令 用于生成自签名证书                          |
 ## `laradock` 子命令说明
 
 在终端中直接使用，例如 `laradock ps`。
@@ -62,3 +62,14 @@
 | `json -c data.json` | 压缩输出json数据 |
 | `json -c '{"a": 1}'` | 压缩输出json数据 |
 | `jsonc` | 等价于 `json -c` |
+
+
+## `mkcert` 命令用法
+
+用于生成自签名证书，方便在本地开发环境中使用 HTTPS。
+
+| 子命令 | 说明 |
+| --- | --- |
+| `mkcert -install` | 安装 mkcert 到系统证书存储 |
+| `mkcert example.com "*.example.com"` | 生成证书用于 example.com 和 所有子域名 |
+| `mkcert -key-file key.pem -cert-file cert.pem example.com` | 使用 -cert-file 和 -key-file 选项可以指定证书和密钥的保存位置和文件名 |

@@ -138,6 +138,23 @@ else
     echo "nvm 已安装，跳过安装步骤"
 fi
 
+# 安装 Claude Code
+echo "正在安装 Claude Code..."
+# 确保 nvm 已加载
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# 检查 node 是否已安装
+if ! command -v node &> /dev/null; then
+    echo "正在安装 Node.js..."
+    nvm install --lts
+fi
+# 检查 claude 是否已安装
+if ! command -v claude &> /dev/null; then
+    npm install -g @anthropic-ai/claude-code
+else
+    echo "Claude Code 已安装，跳过安装步骤"
+fi
+
 # 安装lazydocker
 echo "正在安装 lazydocker..."
 if ! command -v lazydocker &> /dev/null; then
