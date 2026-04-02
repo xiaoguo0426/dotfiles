@@ -14,6 +14,7 @@ help:
 	@echo "  unlink     移除符号链接"
 	@echo "  update     更新 dotfiles 仓库"
 	@echo "  status     查看符号链接状态"
+	@echo "  backup     备份 包括 gnome 扩展"
 
 install:
 	@echo "运行安装脚本..."
@@ -70,6 +71,11 @@ update:
 	@echo "更新 dotfiles..."
 	git pull origin main
 	@echo "更新完成"
+
+backup:
+	@echo "备份 gnome 扩展..."
+	gnome-extensions list --enabled > gnome-extensions.txt
+	@echo "备份完成"
 
 status:
 	@echo "符号链接状态:"
