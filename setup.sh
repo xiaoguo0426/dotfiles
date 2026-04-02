@@ -323,5 +323,6 @@ sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/ubuntu-clean.sh" /usr/local/bi
 sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/ubuntu-mainline-kernel.sh" /usr/local/bin/ubuntu-mainline-kernel
 sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/diff_file.sh" /usr/local/bin/diff-file
 sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/reset-trial-navicat.sh" /usr/local/bin/reset-navicat
+sudo ln -sf "$DOTFILES_DIR/.oh-my-zsh/my-commands/secure-file.sh" /usr/local/bin/secure-file
 
 echo "Setup completed! Please restart your terminal or run 'newgrp docker && source ~/.zshrc' to apply changes."

@@ -21,3 +21,7 @@ alias l='lsd -lA'
 
 alias sd='systemd-manager-tui'
 alias c="glow $CUSTOM_COMMAND_DIR/custom-commands.md"
+
+alias sf="secure-file"
+alias sfv="secure-file view"
+alias sfe="secure-file edit"

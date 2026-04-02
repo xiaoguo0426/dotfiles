@@ -41,6 +41,53 @@
 | `x`        | `x` 命令 用于快速解压文件                          |
 | `copypath`        | `copypath` 命令 用于复制当前路径到剪贴板                          |
 | `copyfile`        | `copyfile` 命令 用于复制当前文件到剪贴板                          |
+| `secure-file` / `sf`  | 敏感文件管理工具（加密、锁定、防删除）                          |
+
+## `secure-file` 命令用法
+
+敏感文件管理工具，提供文件加密和防删除保护功能。
+
+| 子命令 | 说明 |
+| --- | --- |
+| `secure-file lock <文件>` | 锁定文件（防止删除和修改，需要 sudo） |
+| `secure-file unlock <文件>` | 解锁文件（允许删除和修改） |
+| `secure-file encrypt <文件>` | 加密文件（需要输入密码，生成 .enc 文件） |
+| `secure-file decrypt <文件.enc>` | 解密文件（需要输入密码） |
+| `secure-file edit <文件.enc>` | 编辑加密文件（自动解密、编辑、加密） |
+| `secure-file view <文件.enc>` | 查看加密文件（只读） |
+| `secure-file status <文件>` | 查看文件状态（锁定状态、加密状态） |
+
+### 使用示例
+
+```bash
+# 1. 加密敏感文件
+secure-file encrypt ~/Desktop/passwords.txt
+# 会生成 passwords.txt.enc 文件
+
+# 2. 锁定加密文件（防止误删）
+secure-file lock ~/Desktop/passwords.txt.enc
+
+# 3. 查看加密文件
+secure-file view ~/Desktop/passwords.txt.enc
+
+# 4. 编辑加密文件（自动重新加密）
+secure-file edit ~/Desktop/passwords.txt.enc
+
+# 5. 查看文件状态
+secure-file status ~/Desktop/passwords.txt.enc
+
+# 6. 解锁文件（需要删除或修改时）
+secure-file unlock ~/Desktop/passwords.txt.enc
+```
+
+### 推荐工作流程
+
+1. **创建敏感文件**：在桌面创建文件，写入账号密码等信息
+2. **加密文件**：`secure-file encrypt ~/Desktop/passwords.txt`
+3. **删除原文件**：加密时选择删除原文件
+4. **锁定加密文件**：`secure-file lock ~/Desktop/passwords.txt.enc`
+5. **日常使用**：使用 `secure-file view` 或 `secure-file edit` 访问
+
 ## `laradock` 子命令说明
 
 在终端中直接使用，例如 `laradock ps`。
