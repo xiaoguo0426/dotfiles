@@ -37,6 +37,10 @@
 | `btop`        | `btop` 命令                                             |
 | `glow`        | `glow` 命令 用于在终端中渲染markdown文档                          |
 | `mkcert`        | `mkcert` 命令 用于生成自签名证书                          |
+| `z`        | `z` 命令 用于快速切换目录                          |
+| `x`        | `x` 命令 用于快速解压文件                          |
+| `copypath`        | `copypath` 命令 用于复制当前路径到剪贴板                          |
+| `copyfile`        | `copyfile` 命令 用于复制当前文件到剪贴板                          |
 ## `laradock` 子命令说明
 
 在终端中直接使用，例如 `laradock ps`。
