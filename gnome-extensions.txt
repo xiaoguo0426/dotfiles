@@ -14,3 +14,4 @@ native-window-placement@gnome-shell-extensions.gcampax.github.com
 places-menu@gnome-shell-extensions.gcampax.github.com
 system-monitor@gnome-shell-extensions.gcampax.github.com
 windowsNavigator@gnome-shell-extensions.gcampax.github.com
+app-grid-tuner@m-lab
