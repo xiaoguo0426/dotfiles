@@ -258,3 +258,7 @@ export NVM_DIR="$HOME/.nvm"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 export PATH="$HOME/.local/bin:$PATH"
+
+if [ -f ~/.zsh_vars ]; then
+    source ~/.zsh_vars
+fi

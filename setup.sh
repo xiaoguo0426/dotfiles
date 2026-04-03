@@ -82,12 +82,14 @@ if ! command -v autojump &> /dev/null; then
 fi
 
 rm -rf ~/.zshrc
+rm -rf ~/.zsh_vars
 rm -rf ~/.p10k.zsh
 rm -rf ~/.oh-my-zsh/custom/aliases.zsh
 rm -rf ~/.oh-my-zsh/custom/functions.zsh
 rm -rf ~/.oh-my-zsh/custom/my-commands
 
 ln -sf "$DOTFILES_DIR/.zshrc" ~/.zshrc
+cp .zsh_vars_example ~/.zsh_vars
 ln -sf "$DOTFILES_DIR/.p10k.zsh" ~/.p10k.zsh
 ln -sf "$DOTFILES_DIR/.oh-my-zsh/aliases.zsh" ~/.oh-my-zsh/custom/aliases.zsh
 ln -sf "$DOTFILES_DIR/.oh-my-zsh/functions.zsh" ~/.oh-my-zsh/custom/functions.zsh

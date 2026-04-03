@@ -20,7 +20,9 @@ alias lt='lsd --tree'
 alias l='lsd -lA'
 
 alias sd='systemd-manager-tui'
-alias c="glow $CUSTOM_COMMAND_DIR/custom-commands.md"
+alias c="glow $CUSTOM_COMMAND_DIR/markdown/custom-commands.md"
+alias vc="glow $CUSTOM_COMMAND_DIR/markdown/vim.md"
+alias zc="glow $CUSTOM_COMMAND_DIR/markdown/zsh.md"
 
 alias sf="secure-file"
 alias sfv="secure-file view"
