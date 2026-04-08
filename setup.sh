@@ -81,6 +81,11 @@ if ! command -v autojump &> /dev/null; then
     sudo apt install -y autojump
 fi
 
+# 安装starship
+if ! command -v starship &> /dev/null; then
+    curl -sS https://starship.rs/install.sh | sh
+fi
+
 rm -rf ~/.zshrc
 rm -rf ~/.zsh_vars
 rm -rf ~/.p10k.zsh

@@ -38,11 +38,63 @@ function y() {
 glm() {
     if [[ -z "$GLM_KEY" ]]; then
         echo "错误: GLM_KEY 未设置"
-        echo "请在 ~/.bashrc 中添加: export GLM_KEY='your-api-key'"
+        echo "请在 ~/.zsh_vars 中添加: export GLM_KEY='your-api-key'"
         return 1
     fi
     ANTHROPIC_AUTH_TOKEN="$GLM_KEY" \
     ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/anthropic" \
-    ANTHROPIC_MODEL="glm-5" \
+    ANTHROPIC_MODEL="glm-4.6" \
     claude "$@"
+}
+
+# Qwen
+qwen() {
+    if [[ -z "$QWEN_KEY" ]]; then
+        echo "错误: QWEN_KEY 未设置"
+        echo "请在 ~/.zsh_vars 中添加: export QWEN_KEY='your-api-key'"
+        return 1
+    fi
+    ANTHROPIC_AUTH_TOKEN="$QWEN_KEY" \
+    ANTHROPIC_BASE_URL="https://dashscope.aliyuncs.com/apps/anthropic" \
+    ANTHROPIC_MODEL="qwen3.6-plus" \
+    claude "$@"
+}
+
+# VOLCES
+volces() {
+    if [[ -z "$VOLCES_KEY" ]]; then
+        echo "错误: VOLCES_KEY 未设置"
+        echo "请在 ~/.zsh_vars 中添加: export VOLCES_KEY='your-api-key'"
+        return 1
+    fi
+    ANTHROPIC_AUTH_TOKEN="$VOLCES_KEY" \
+    ANTHROPIC_BASE_URL="https://ark.cn-beijing.volces.com/api/coding" \
+    ANTHROPIC_MODEL="glm-4.7" \
+    claude "$@"
+}
+
+# MINIMAX
+minimax() {
+    if [[ -z "$MINIMAX_KEY" ]]; then
+        echo "错误: MINIMAX_KEY 未设置"
+        echo "请在 ~/.zsh_vars 中添加: export MINIMAX_KEY='your-api-key'"
+        return 1
+    fi
+    ANTHROPIC_AUTH_TOKEN="$MINIMAX_KEY" \
+    ANTHROPIC_BASE_URL="https://api.minimaxi.com/anthropic" \
+    ANTHROPIC_MODEL="m2.7" \
+    claude "$@"
+}
+
+# OPENROUTER
+openrouter() {
+    if [[ -z "$OPENROUTER_KEY" ]]; then
+        echo "错误: OPENROUTER_KEY 未设置"
+        echo "请在 ~/.zsh_vars 中添加: export OPENROUTER_KEY='your-api-key'"
+        return 1
+    fi
+    ANTHROPIC_AUTH_TOKEN="$OPENROUTER_KEY" \
+    ANTHROPIC_BASE_URL="https://openrouter.ai/api" \
+    ANTHROPIC_MODEL="qwen/qwen3.6-plus:free" \
+    claude "$@" --session-id openrouter
 }

@@ -262,3 +262,7 @@ export PATH="$HOME/.local/bin:$PATH"
 if [ -f ~/.zsh_vars ]; then
     source ~/.zsh_vars
 fi
+
+eval "$(starship init zsh)"
+# opencode
+export PATH=/home/xiaoguo0426/.opencode/bin:$PATH

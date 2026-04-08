@@ -22,7 +22,13 @@ alias l='lsd -lA'
 alias sd='systemd-manager-tui'
 alias c="glow $CUSTOM_COMMAND_DIR/markdown/custom-commands.md"
 alias vc="glow $CUSTOM_COMMAND_DIR/markdown/vim.md"
+alias cv="tac $CUSTOM_COMMAND_DIR/markdown/vim.md | glow"
 alias zc="glow $CUSTOM_COMMAND_DIR/markdown/zsh.md"
+alias cz="tac $CUSTOM_COMMAND_DIR/markdown/zsh.md | glow"
+alias uc="glow $CUSTOM_COMMAND_DIR/markdown/ubuntu.md"
+alias cu="tac $CUSTOM_COMMAND_DIR/markdown/ubuntu.md | glow"
+alias yc="glow $CUSTOM_COMMAND_DIR/markdown/yazi.md"
+alias cy="tac $CUSTOM_COMMAND_DIR/markdown/yazi.md | glow"
 
 alias sf="secure-file"
 alias sfv="secure-file view"
