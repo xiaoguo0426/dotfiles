@@ -97,7 +97,14 @@ dotfiles/
 | btop | 系统资源监控 |
 | systemctl-tui | Systemd 服务管理 TUI |
 | glow | 终端 Markdown 渲染器 |
+| leaf | 终端 Markdown 预览器（GUI-like 体验） |
 | tennis | 终端工具 |
+
+### 桌面工具
+
+| 工具 | 说明 |
+|------|------|
+| Ulauncher | 应用启动器（模糊搜索、扩展支持） |
 
 ### Zsh 插件
 
@@ -186,6 +193,49 @@ JSON 格式化工具：
 echo '{"name":"test"}' | json  # 格式化 JSON
 ```
 
+## 工具使用说明
+
+### leaf - 终端 Markdown 预览器
+
+leaf 提供类似 GUI 的 Markdown 预览体验：
+
+```bash
+leaf README.md           # 打开 Markdown 文件
+leaf --watch README.md   # 实时预览模式（文件修改自动重载）
+leaf                     # 打开文件选择器
+leaf --inline README.md  # 直接输出到终端（不进入 TUI）
+```
+
+**常用快捷键：**
+
+| 快捷键 | 功能 |
+|--------|------|
+| `j/k` | 上下滚动 |
+| `d/u` | 翻页 |
+| `t` | 切换目录侧边栏 |
+| `Ctrl+E` | 在编辑器中打开 |
+| `Ctrl+F` 或 `/` | 搜索 |
+| `q` | 退出 |
+
+### Ulauncher - 应用启动器
+
+Ulauncher 是快速应用启动器，默认快捷键为 `Super` (Windows 键)：
+
+**功能特性：**
+- 模糊搜索应用
+- 内置计算器（直接输入数学表达式）
+- 文件浏览器（输入 `~` 或 `/` 开始浏览）
+- 扩展支持（访问 https://ext.ulauncher.io/ 获取扩展）
+
+**常用操作：**
+
+| 输入 | 功能 |
+|------|------|
+| 应用名称 | 搜索并启动应用 |
+| `5 + 3` | 计算数学表达式 |
+| `~/Documents` | 浏览文件目录 |
+| `/etc` | 浏览系统目录 |
+
 ## 自定义
 
 ### 添加新配置
@@ -216,9 +266,11 @@ echo '{"name":"test"}' | json  # 格式化 JSON
 - yazi
 - systemctl-tui
 - glow
+- leaf
 - btop
 - jq
 - tennis
+- Ulauncher
 
 ## 注意事项
 

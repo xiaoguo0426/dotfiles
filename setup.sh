@@ -299,6 +299,27 @@ if ! command -v glow &> /dev/null; then
     fi
 fi
 
+# 安装leaf
+if ! command -v leaf &> /dev/null; then
+    echo "正在安装 leaf..."
+    if curl -fsSL https://raw.githubusercontent.com/RivoLink/leaf/main/scripts/install.sh | sh 2>/dev/null; then
+        echo -e "${GREEN}✓ leaf 安装成功${NC}"
+    else
+        echo "警告: leaf 安装失败，请手动安装"
+    fi
+fi
+
+# 安装Ulauncher
+if ! command -v ulauncher &> /dev/null; then
+    echo "正在安装 Ulauncher..."
+    sudo add-apt-repository universe -y
+    sudo add-apt-repository ppa:agornostal/ulauncher -y
+    sudo apt update
+    sudo apt install -y ulauncher
+    # 设置开机自启
+    systemctl --user enable --now ulauncher 2>/dev/null || true
+fi
+
 # 安装btop
 if ! command -v btop &> /dev/null; then
     echo "正在安装 btop..."
