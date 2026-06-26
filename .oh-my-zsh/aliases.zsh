@@ -7,6 +7,7 @@ alias ld="laradock"
 alias lzd="lazydocker"
 alias s="lazyssh"
 alias g="lazygit"
+alias r="/home/xiaoguo0426/my-commands/setup-browser-routing.sh"
 
 alias jsonc="json -c"
 
@@ -33,3 +34,7 @@ alias cy="tac $CUSTOM_COMMAND_DIR/markdown/yazi.md | glow"
 alias sf="secure-file"
 alias sfv="secure-file view"
 alias sfe="secure-file edit"
+
+alias diff_file="$CUSTOM_COMMAND_DIR/diff_file.sh"
+
+alias qwenc="/home/xiaoguo0426/.nvm/versions/node/v24.10.0/bin/qwen"

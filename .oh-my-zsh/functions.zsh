@@ -95,6 +95,6 @@ openrouter() {
     fi
     ANTHROPIC_AUTH_TOKEN="$OPENROUTER_KEY" \
     ANTHROPIC_BASE_URL="https://openrouter.ai/api" \
-    ANTHROPIC_MODEL="qwen/qwen3.6-plus:free" \
-    claude "$@" --session-id openrouter
+    ANTHROPIC_MODEL="qwen/qwen3.6-plus-preview" \
+    claude "$@" 
 }
